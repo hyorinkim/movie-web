@@ -2,10 +2,14 @@ import Button from "./Button";
 import styles from './App.module.css'
 import { useState , useEffect} from 'react'
 function Hello(){
-    useEffect(()=>{
+    function destroyed(){//Hello component가 사라질때 호출되는 함수
+        console.log("destroyed")
+    }
+    function created(){// Hello component가 생성될때 호출되는 함수
         console.log("created");
-        return () => console.log("destoryed")//cleanup function 컴포넌트가 destroy될 때 뭔가 할 수 있다.
-    },[])
+        return destroyed//cleanup 함수
+    }
+    useEffect(created,[])
     return <h1> Hello</h1>
 }
 function App(){
