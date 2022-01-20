@@ -2,14 +2,28 @@ import Button from "./Button";
 import styles from './App.module.css'
 import { useState , useEffect} from 'react'
 function Hello(){
-    function destroyed(){//Hello component가 사라질때 호출되는 함수
-        console.log("destroyed")
-    }
-    function created(){// Hello component가 생성될때 호출되는 함수
-        console.log("created");
-        return destroyed//cleanup 함수
-    }
-    useEffect(created,[])
+    // function destroyed(){//Hello component가 사라질때 호출되는 함수
+    //     console.log("destroyed")
+    // }
+    // function created(){// Hello component가 생성될때 호출되는 함수
+    //     console.log("created");
+    //     return destroyed//cleanup 함수
+    // }
+
+    // useEffect(created,[])
+    
+    //작성 2가지 방법
+    // useEffect(function(){
+    //     console.log("hi");
+    //     return function(){
+    //         console.log("bye")
+    //     }
+    // },[])//잘 안 쓰는 방식
+
+    useEffect(()=>{
+        console.log("hi :)");
+        return ()=>console.log("bye :(")
+    },[])//보통 쓰는 방식, 짧은 방식
     return <h1> Hello</h1>
 }
 function App(){
